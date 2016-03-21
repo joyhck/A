@@ -1,1 +1,4 @@
 E:\Users\smart\Desktop\ez\Elobuddy - Corki\bin\Release\GuTenTak_Corki.exe.config
+E:\Users\smart\Desktop\ez\Elobuddy - Corki\obj\Debug\GuTenTak_Corki.Properties.Resources.resources
+E:\Users\smart\Desktop\ez\Elobuddy - Corki\obj\Debug\GuTenTak_Corki.csproj.GenerateResource.Cache
+E:\Users\smart\Desktop\ez\Elobuddy - Corki\obj\Debug\GuTenTak_Corki.csprojResolveAssemblyReference.cache

@@ -60,7 +60,6 @@ namespace GuTenTak.Corki
             var RTarget = TargetSelector.GetTarget(R.Range, DamageType.Mixed);
             if (RTarget == null) return;
             {
-<<<<<<< HEAD
                 R.AllowedCollisionCount = 0;
                 var useR = ModesMenu1["ComboR"].Cast<CheckBox>().CurrentValue;
                 var Rp = R.GetPrediction(RTarget);
@@ -92,55 +91,45 @@ namespace GuTenTak.Corki
                     {
                         R.Cast(RTarget);
                     }
-
-=======
-                if (ModesMenu1["ComboA"].Cast<CheckBox>().CurrentValue && !ObjectManager.Player.IsInAutoAttackRange(Target) && !Target.IsInvulnerable)
-                {
-                    Q.Cast(Qp.CastPosition);
->>>>>>> origin/master
                 }
-            }
 
-            var QTarget = TargetSelector.GetTarget(Q.Range, DamageType.Mixed);
-            if (QTarget == null) return;
-            {
-                var useQ = ModesMenu1["ComboQ"].Cast<CheckBox>().CurrentValue;
-                var Qp = Q.GetPrediction(QTarget);
-                if (!QTarget.IsValid()) return;
-                if (Q.IsInRange(QTarget) && Q.IsReady() && useQ && Qp.HitChance >= HitChance.High && !QTarget.IsInvulnerable)
+                var QTarget = TargetSelector.GetTarget(Q.Range, DamageType.Mixed);
+                if (QTarget == null) return;
                 {
-                    if (ModesMenu1["ComboA"].Cast<CheckBox>().CurrentValue && !ObjectManager.Player.IsInAutoAttackRange(QTarget))
+                    var useQ = ModesMenu1["ComboQ"].Cast<CheckBox>().CurrentValue;
+                    var Qp = Q.GetPrediction(QTarget);
+                    if (!QTarget.IsValid()) return;
+                    if (Q.IsInRange(QTarget) && Q.IsReady() && useQ && Qp.HitChance >= HitChance.High && !QTarget.IsInvulnerable)
                     {
-                        Q.Cast(Qp.CastPosition);
-                    }
-                    else
-                    {
-                        if (!ModesMenu1["ComboA"].Cast<CheckBox>().CurrentValue)
+                        if (ModesMenu1["ComboA"].Cast<CheckBox>().CurrentValue && !ObjectManager.Player.IsInAutoAttackRange(QTarget))
                         {
                             Q.Cast(Qp.CastPosition);
                         }
+                        else
+                        {
+                            if (!ModesMenu1["ComboA"].Cast<CheckBox>().CurrentValue)
+                            {
+                                Q.Cast(Qp.CastPosition);
+                            }
+                        }
                     }
                 }
-            }
-            var ETarget = TargetSelector.GetTarget(550, DamageType.Mixed);
-            if (ETarget == null) return;
-            {
-                var useE = ModesMenu1["ComboE"].Cast<CheckBox>().CurrentValue;
-                if (E.IsInRange(QTarget) && E.IsReady() && useE && _Player.ManaPercent >= Program.ModesMenu1["ManaCE"].Cast<Slider>().CurrentValue && ObjectManager.Player.IsInAutoAttackRange(QTarget))
+                var ETarget = TargetSelector.GetTarget(550, DamageType.Mixed);
+                if (ETarget == null) return;
                 {
-                    E.Cast();
+                    var useE = ModesMenu1["ComboE"].Cast<CheckBox>().CurrentValue;
+                    if (E.IsInRange(QTarget) && E.IsReady() && useE && _Player.ManaPercent >= Program.ModesMenu1["ManaCE"].Cast<Slider>().CurrentValue && ObjectManager.Player.IsInAutoAttackRange(QTarget))
+                    {
+                        E.Cast();
+                    }
                 }
             }
         }
 
-<<<<<<< HEAD
         internal static void zigzag(EventArgs args)
         {
             var zigzagTarget = TargetSelector.GetTarget(Q.Range, DamageType.Mixed);
             if (zigzagTarget == null)
-=======
-            if (W.IsInRange(Target) && W.IsReady() && useW && _Player.ManaPercent >= Program.ModesMenu1["ManaCW"].Cast<Slider>().CurrentValue && Wp.HitChance >= HitChance.High && !Target.IsInvulnerable)
->>>>>>> origin/master
             {
                 czx = 0;
                 czx2 = 0;
@@ -148,12 +137,8 @@ namespace GuTenTak.Corki
                 czy2 = 0;
                 return;
             }
-<<<<<<< HEAD
 
             if (czx < czx2)
-=======
-            if (R.IsInRange(Target) && R.IsReady() && useR && !Target.IsInvulnerable)
->>>>>>> origin/master
             {
                 if (czx2 >= zigzagTarget.Position.X)
                     cz = true;
@@ -502,7 +487,6 @@ namespace GuTenTak.Corki
             }
         }
 
-<<<<<<< HEAD
         /*
         internal static void Dash_OnDash(Obj_AI_Base sender, Dash.DashEventArgs e)
         {
@@ -532,8 +516,6 @@ namespace GuTenTak.Corki
         }
         */
 
-=======
->>>>>>> origin/master
         internal static void Gapcloser_OnGapCloser(AIHeroClient sender, Gapcloser.GapcloserEventArgs gapcloser)
         {
             if (Program.ModesMenu3["AntiGap"].Cast<CheckBox>().CurrentValue)
@@ -553,7 +535,6 @@ namespace GuTenTak.Corki
         public static void KillSteal()
         {
             if (Program.ModesMenu1["KS"].Cast<CheckBox>().CurrentValue)
-<<<<<<< HEAD
             {
                 foreach (var enemy in EntityManager.Heroes.Enemies.Where(a => !a.IsDead && !a.IsZombie && a.Health > 0))
                 {
@@ -575,7 +556,7 @@ namespace GuTenTak.Corki
 
                         if (Player.HasBuff("corkimissilebarragecounterbig"))
                         {
-                            if (DamageLib.RCalc(enemy)*.5f >= enemy.Health)
+                            if (DamageLib.RCalc(enemy) * .5f >= enemy.Health)
                             {
                                 var Rp = R.GetPrediction(enemy);
                                 if (R.IsReady() && R.IsInRange(enemy) && Program.ModesMenu1["KR"].Cast<CheckBox>().CurrentValue && Rp.HitChance >= HitChance.High && !enemy.IsInvulnerable)
@@ -584,45 +565,9 @@ namespace GuTenTak.Corki
                                 }
                             }
                         }
-
-                        if (DamageLib.RCalc(enemy) >= enemy.Health)
-                        {
-                            var Rp = R.GetPrediction(enemy);
-                            if (R.IsReady() && R.IsInRange(enemy) && Program.ModesMenu1["KR"].Cast<CheckBox>().CurrentValue && Rp.HitChance >= HitChance.High && !enemy.IsInvulnerable)
-=======
-            {
-                foreach (var enemy in EntityManager.Heroes.Enemies.Where(a => !a.IsDead && !a.IsZombie && a.Health > 0))
-            {
-                if (enemy == null) return;
-                if (enemy.IsValidTarget(R.Range) && enemy.HealthPercent <= 40)
-                {
-                        var Qp = Q.GetPrediction(enemy);
-                        var Wp = W.GetPrediction(enemy);
-                        var Rp = R.GetPrediction(enemy);
-                        if (DamageLib.QCalc(enemy) >= enemy.Health && Q.IsReady() && Q.IsInRange(enemy) && Program.ModesMenu1["KQ"].Cast<CheckBox>().CurrentValue && Qp.HitChance >= HitChance.High && !enemy.IsInvulnerable)
-                            {
-                           
-                            Q.Cast(Qp.CastPosition);
-                            }
-                            if (DamageLib.WCalc(enemy) >= enemy.Health && W.IsReady() && W.IsInRange(enemy) && Program.ModesMenu1["KW"].Cast<CheckBox>().CurrentValue && Wp.HitChance >= HitChance.High && !enemy.IsInvulnerable)
-                            {
-                            
-                            W.Cast(Wp.CastPosition);
-                            }
-                            if (DamageLib.RCalc(enemy) >= enemy.Health && R.IsReady() && R.IsInRange(enemy) && Program.ModesMenu1["KR"].Cast<CheckBox>().CurrentValue && Rp.HitChance >= HitChance.High && !enemy.IsInvulnerable)
->>>>>>> origin/master
-                            {
-                           
-                            if (ObjectManager.Player.CountEnemiesInRange(700) == 0)
-                                {
-                                    R.Cast(Rp.CastPosition);
-                                }
-                            }
-                        }
                     }
                 }
             }
-<<<<<<< HEAD
         }
         /*
 var Target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
