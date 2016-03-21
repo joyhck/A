@@ -195,7 +195,6 @@ namespace GuTenTak.Corki
         public static void Harass()
         {
             //Harass
-
             var Target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
             if (Target == null) return;
             {
@@ -214,7 +213,7 @@ namespace GuTenTak.Corki
                 R.AllowedCollisionCount = 0;
                 var useR = ModesMenu1["HarassR"].Cast<CheckBox>().CurrentValue;
                 var Rp = R.GetPrediction(RTarget);
-                if (!RTarget.IsValid()) return;
+                if (!RTarget.IsValid() && RTarget == null) return;
                 if (R.IsInRange(RTarget) && R.IsReady() && useR && !RTarget.IsInvulnerable && Program._Player.ManaPercent >= Program.ModesMenu1["ManaHR"].Cast<Slider>().CurrentValue)
                 {
                     float rSplash = 140;
