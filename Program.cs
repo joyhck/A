@@ -64,11 +64,6 @@ namespace GuTenTak.Corki
             Game.OnUpdate += Common.zigzag;
             SkinBase = Player.Instance.SkinId;
             // Item
-            Gapcloser.OnGapcloser += Common.Gapcloser_OnGapCloser;
-            //Dash.OnDash += Common.Dash_OnDash;
-            Game.OnTick += OnTick;
-            // Item
-            SkinBase = Player.Instance.SkinId;
             try
             {
                 if (ChampionName != PlayerInstance.BaseSkinName)
@@ -135,8 +130,6 @@ namespace GuTenTak.Corki
                 ModesMenu3 = Menu.AddSubMenu("Misc", "Modes3Corki");
                 ModesMenu3.AddLabel("Misc Configs");
                 ModesMenu3.Add("AntiGap", new CheckBox("Use W for Anti-Gapcloser", true));
-                // ModesMenu3.Add("Flee", new KeyBind("Flee", false, KeyBind.BindTypes.HoldActive, "G".ToCharArray()[0]));
-                ModesMenu3.Add("AntiGap", new CheckBox("Use E for Anti-Gapcloser", true));
                 ModesMenu3.AddLabel("Flee Configs");
                 ModesMenu3.Add("FleeR", new CheckBox("Use R on Flee", true));
                 ModesMenu3.Add("FleeW", new CheckBox("Use W on Flee", true));
@@ -172,7 +165,7 @@ namespace GuTenTak.Corki
 
                 ModesMenu3.AddLabel("Skin Hack");
                 ModesMenu3.Add("skinhack", new CheckBox("Activate Skin hack", false));
-                ModesMenu3.Add("skinId", new ComboBox("Skin Mode", 0, "Default", "1", "2", "3", "4", "5", "6", "7", "8"));
+                ModesMenu3.Add("skinId", new ComboBox("Skin Mode", 0, "Default", "1", "2", "3", "4", "5", "6", "7"));
 
                 DrawMenu = Menu.AddSubMenu("Draws", "DrawCorki");
                 DrawMenu.Add("drawQ", new CheckBox(" Draw Q", true));
