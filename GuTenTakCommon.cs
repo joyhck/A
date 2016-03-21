@@ -198,22 +198,51 @@ namespace GuTenTak.Corki
 
             var Target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
             if (Target == null) return;
-            var TargetR = TargetSelector.GetTarget(R.Range, DamageType.Physical);
-            var useQ = ModesMenu1["HarassQ"].Cast<CheckBox>().CurrentValue;
-            var useR = ModesMenu1["HarassR"].Cast<CheckBox>().CurrentValue;
-            var Qp = Q.GetPrediction(Target);
-            var Rp = R.GetPrediction(Target);
-            if (!Target.IsValid() && Target == null) return;
-
-
-            if (Q.IsInRange(Target) && Q.IsReady() && useQ && Qp.HitChance >= HitChance.High && Program._Player.ManaPercent >= Program.ModesMenu1["ManaHQ"].Cast<Slider>().CurrentValue)
             {
-                Q.Cast(Qp.CastPosition);
+                var useQ = ModesMenu1["HarassQ"].Cast<CheckBox>().CurrentValue;
+                var Qp = Q.GetPrediction(Target);
+                if (!Target.IsValid() && Target == null) return;
+                if (Q.IsInRange(Target) && Q.IsReady() && useQ && Qp.HitChance >= HitChance.High && Program._Player.ManaPercent >= Program.ModesMenu1["ManaHQ"].Cast<Slider>().CurrentValue)
+                {
+                    Q.Cast(Qp.CastPosition);
+                }
             }
-            if (R.IsInRange(Target) && R.IsReady() && useR && Rp.HitChance >= HitChance.High && Program._Player.ManaPercent >= Program.ModesMenu1["ManaHR"].Cast<Slider>().CurrentValue)
-            {
-                R.Cast(Rp.CastPosition);
 
+            var RTarget = TargetSelector.GetTarget(R.Range, DamageType.Mixed);
+            if (RTarget == null) return;
+            {
+                R.AllowedCollisionCount = 0;
+                var useR = ModesMenu1["HarassR"].Cast<CheckBox>().CurrentValue;
+                var Rp = R.GetPrediction(RTarget);
+                if (!RTarget.IsValid()) return;
+                if (R.IsInRange(RTarget) && R.IsReady() && useR && !RTarget.IsInvulnerable && Program._Player.ManaPercent >= Program.ModesMenu1["ManaHR"].Cast<Slider>().CurrentValue)
+                {
+                    float rSplash = 140;
+                    if (Player.HasBuff("corkimissilebarragecounterbig"))
+                    {
+                        rSplash = 290;
+                    }
+
+                    bool cast = true;
+                    var poutput = R.GetPrediction(RTarget);
+                    foreach (var minion in poutput.CollisionObjects.Where(minion => minion.IsEnemy && minion.Distance(poutput.CastPosition) > rSplash))
+                    {
+                        cast = false;
+                        break;
+                    }
+
+                    if (cast == true)
+                    {
+                        if (Rp.HitChance >= HitChance.Medium)
+                        {
+                            R.Cast(Rp.CastPosition);
+                        }
+                    }
+                    else
+                    {
+                        R.Cast(RTarget);
+                    }
+                }
             }
         }
         public static void LastHit()
