@@ -195,25 +195,13 @@ namespace GuTenTak.Corki
         public static void Harass()
         {
             //Harass
-            var Target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
-            if (Target == null) return;
-            {
-                var useQ = ModesMenu1["HarassQ"].Cast<CheckBox>().CurrentValue;
-                var Qp = Q.GetPrediction(Target);
-                if (!Target.IsValid() && Target == null) return;
-                if (Q.IsInRange(Target) && Q.IsReady() && useQ && Qp.HitChance >= HitChance.High && Program._Player.ManaPercent >= Program.ModesMenu1["ManaHQ"].Cast<Slider>().CurrentValue)
-                {
-                    Q.Cast(Qp.CastPosition);
-                }
-            }
-
             var RTarget = TargetSelector.GetTarget(R.Range, DamageType.Mixed);
             if (RTarget == null) return;
             {
                 R.AllowedCollisionCount = 0;
                 var useR = ModesMenu1["HarassR"].Cast<CheckBox>().CurrentValue;
                 var Rp = R.GetPrediction(RTarget);
-                if (!RTarget.IsValid() && RTarget == null) return;
+                if (!RTarget.IsValid()) return;
                 if (R.IsInRange(RTarget) && R.IsReady() && useR && !RTarget.IsInvulnerable && Program._Player.ManaPercent >= Program.ModesMenu1["ManaHR"].Cast<Slider>().CurrentValue)
                 {
                     float rSplash = 140;
@@ -241,6 +229,18 @@ namespace GuTenTak.Corki
                     {
                         R.Cast(RTarget);
                     }
+                }
+            }
+
+            var Target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
+            if (Target == null) return;
+            {
+                var useQ = ModesMenu1["HarassQ"].Cast<CheckBox>().CurrentValue;
+                var Qp = Q.GetPrediction(Target);
+                if (!Target.IsValid() && Target == null) return;
+                if (Q.IsInRange(Target) && Q.IsReady() && useQ && Qp.HitChance >= HitChance.High && Program._Player.ManaPercent >= Program.ModesMenu1["ManaHQ"].Cast<Slider>().CurrentValue)
+                {
+                    Q.Cast(Qp.CastPosition);
                 }
             }
         }
